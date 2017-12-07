@@ -8,6 +8,12 @@ The goal of this CLI is to ease automating tests on a set of pages, using Lighth
 
 Node 6.10.0 or higher, together with NPM 3 or higher.
 
+## Installing
+
+```
+npm install -g @genexus/lighthouse-inspector
+```
+
 ## Usage
 
 ```sh

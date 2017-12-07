@@ -1,5 +1,5 @@
 {
-  "name": "lighthouse-inspector",
+  "name": "@genexus/lighthouse-inspector",
   "version": "1.0.0",
   "description": "Run Google Lighthouse on a set of URLs, specifying expectations",
   "main": "index.js",
@@ -27,5 +27,17 @@
   },
   "devDependencies": {
     "mocha": "^4.0.1"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genexuslabs/lighthouse-inspector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/genexuslabs/lighthouse-inspector/issues"
+  },
+  "homepage": "https://github.com/genexuslabs/lighthouse-inspector#readme"
 }
