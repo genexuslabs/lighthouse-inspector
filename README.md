@@ -10,8 +10,10 @@ Node 6.10.0 or higher, together with NPM 3 or higher.
 
 ## Installing
 
-```
+```sh
 npm install -g @genexus/lighthouse-inspector
+# or
+npm install --save-dev @genexus/lighthouse-inspector
 ```
 
 ## Usage

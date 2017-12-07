@@ -15,7 +15,6 @@ function logAnalyzerResult({ error, messages }) {
 }
 
 function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
-  console.log(flags)
   return chromeLauncher.launch(flags).then(chrome => {
     flags.port = chrome.port;
     return lighthouse(url, flags, config).then(results =>
