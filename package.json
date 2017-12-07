@@ -1,0 +1,31 @@
+{
+  "name": "lighthouse-inspector",
+  "version": "1.0.0",
+  "description": "Run Google Lighthouse on a set of URLs, specifying expectations",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "lighthouse",
+    "pwa",
+    "performance",
+    "accessibility"
+  ],
+  "author": "Nicolás Cardelino",
+  "license": "MIT",
+  "dependencies": {
+    "cli": "^1.0.1",
+    "lighthouse": "^2.6.0"
+  },
+  "bin": {
+    "lighthouse-inspector": "cli.js"
+  },
+  "engines": {
+    "node": ">=6.10.0",
+    "npm": ">= 3.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
+}

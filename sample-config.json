@@ -1,0 +1,25 @@
+{
+	"pages": [
+		"https://google.com/"
+	],
+	"expectations": {
+		"categories": {
+			"pwa": 90,
+			"best-practices": 90,
+			"performance": 90,
+			"accessibility": 90
+		},
+		"audits": {
+			"first-meaningful-paint": 30,
+			"load-fast-enough-for-pwa": true
+		}
+	},
+	"lighthouseParams": {
+		"flags": {
+		  "chromeFlags": ["--headless"]
+		},
+		"config": {
+		  "extends": "lighthouse:default"
+		}
+	}
+}
