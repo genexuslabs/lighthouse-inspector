@@ -22,30 +22,30 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
   });
 }
 
-function inspectPages (pending, expectations = {}, lighthouseParams = {}) {
+function inspectPages (pending, opts) {
   if (pending.length > 0) {
     const [url] = pending;
-    const { flags, config } = lighthouseParams;
+    const { expectations, lighthouseParams = {} } = opts;
 
     console.log(`Running lighthouse test on ${url}`);
-    launchChromeAndRunLighthouse(url, flags, config).then(results => {
+    launchChromeAndRunLighthouse(url, lighthouseParams.flags, lighthouseParams.config).then(results => {
       const analyzerResult = analyzer(results, expectations);
-      if (analyzerResult.error) {
+      if (opts.failOnUnmetExpectation && analyzerResult.error) {
         process.exitCode = 1;
       }
       logAnalyzerResult(analyzerResult);
-      inspectPages(pending.slice(1), expectations, lighthouseParams);
+      inspectPages(pending.slice(1), opts);
     });
   }
 }
 
 module.exports = (configPath) => {
-  const config = JSON.parse(fs.readFileSync(configPath));
-  const { pages, expectations, lighthouseParams } = config;
+  const opts = JSON.parse(fs.readFileSync(configPath));
+  const { pages } = opts;
 
   if (pages.length === 0) {
     console.error("At least one URL must be specified in the pages property of the config JSON file.");
     return;
   }
-  return inspectPages(pages, expectations, lighthouseParams);
+  return inspectPages(pages, opts);
 };

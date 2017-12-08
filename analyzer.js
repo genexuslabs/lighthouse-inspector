@@ -7,7 +7,7 @@ function getFailedExpectationMessage (type, name, score, expectedScore) {
   return `${type} '${name}' score is ${score} (${text} value is ${expectedScore})`;
 }
 
-module.exports = function (results, expectations){
+module.exports = function (results, expectations = {}){
   let error = false;
   let messages = [];
 

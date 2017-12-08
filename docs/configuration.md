@@ -43,6 +43,7 @@ lighthouse-inspector --config /path/to/config
 | pages | <code>string[]</code> |
 | expectations | <code>Object</code> |
 | lighthouseParams | <code>Object&#124;undefined</code> |
+| failOnUnmetExpectation | <code>boolean</code> |
 
 ### `pages: string[]`
 
@@ -70,3 +71,7 @@ The `lighthouseParams` property specifies the flags and configuration for Lighth
 | - | - | - |
 | config | <code>Object</code> | A Lighthouse configuration object as specified in the [Lightouse configuration file documentation](https://github.com/GoogleChrome/lighthouse/blob/master/docs/configuration.md). |
 | flags | <code>Object</code> | An object containing Lighthouse flags, as specified in the [Lighthouse CLI options](https://github.com/GoogleChrome/lighthouse#cli-options) |
+
+### `failOnUnmetExpectation: boolean`
+
+The `failOnUnmetExpectation` property indicates whether the program will return with an error code when an expectation is unmet. Defaults to `false`.

@@ -24,7 +24,7 @@ lighthouse-inspector --config /path/to/config
 
 The config option lets you specify the path to the [configuration file](docs/configuration.md). This JSON file lets you specify the set of URLs to be tested, the expected scores and, if needed, the Lighthouse configuration. Check the [configuration file documentation](docs/configuration.md) for more information.
 
-When an expected score isn't met, a message explaining the error is shown and the program returns with an error.
+When an expected score isn't met, a message explaining which category or audit didn't meet the expected score.
 
 ## Running the tests
 

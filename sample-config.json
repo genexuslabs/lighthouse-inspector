@@ -21,5 +21,6 @@
 		"config": {
 		  "extends": "lighthouse:default"
 		}
-	}
+	},
+	"failOnUnmetExpectation": false
 }
