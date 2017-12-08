@@ -1,6 +1,6 @@
 {
   "name": "@genexus/lighthouse-inspector",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Run Google Lighthouse on a set of URLs, specifying expectations",
   "main": "index.js",
   "scripts": {

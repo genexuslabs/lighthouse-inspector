@@ -22,13 +22,29 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
   });
 }
 
+function createLighthouseConfig ({ categories = {}, audits = {} }, baseConfig = {}) {
+  const onlyCategories = Object.keys(categories);
+  const onlyAudits = Object.keys(audits);
+  const configFromExpectations = {};
+
+  if (onlyCategories.length > 0) {
+    configFromExpectations.onlyCategories = onlyCategories;
+  }
+  if (onlyAudits.length > 0) {
+    configFromExpectations.onlyAudits = onlyAudits;
+  }
+
+  return Object.assign(configFromExpectations, baseConfig);
+}
+
 function inspectPages (pending, opts) {
   if (pending.length > 0) {
     const [url] = pending;
     const { expectations, lighthouseParams = {} } = opts;
+    const lighthouseConfig = createLighthouseConfig(expectations, lighthouseParams.config);
 
     console.log(`Running lighthouse test on ${url}`);
-    launchChromeAndRunLighthouse(url, lighthouseParams.flags, lighthouseParams.config).then(results => {
+    launchChromeAndRunLighthouse(url, lighthouseParams.flags, lighthouseConfig).then(results => {
       const analyzerResult = analyzer(results, expectations);
       if (opts.failOnUnmetExpectation && analyzerResult.error) {
         process.exitCode = 1;

@@ -1,10 +1,10 @@
 #! /usr/bin/env node
 
-const cli = require('cli');
-const inspector = require('.');
+const cli = require("cli");
+const inspector = require(".");
 
 const options = cli.parse({
-  "config": ["c", "Config file path. (required)", "file", ""]
+  config: ["c", "Config file path. (required)", "file", ""]
 });
 
 if (!options.config) {
