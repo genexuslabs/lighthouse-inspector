@@ -11,24 +11,27 @@ function getFailedExpectationMessage(type, name, score, expectedScore) {
 
 module.exports = function(results, expectations = {}) {
   let error = false;
-  let messages = [];
+  const messages = [];
+  const { categories, audits } = expectations;
 
-  if (expectations.categories) {
+  if (categories) {
     for (const r of results.reportCategories) {
-      const expectedScore = expectations.categories[r.id];
-      const { score, name } = r;
-      if (!evalExpectation(expectedScore, score)) {
-        error = true;
-        messages.push(
-          getFailedExpectationMessage("Category", name, score, expectedScore)
-        );
+      if (categories[r.id]) {
+        const expectedScore = categories[r.id];
+        const { score, name } = r;
+        if (!evalExpectation(expectedScore, score)) {
+          error = true;
+          messages.push(
+            getFailedExpectationMessage("Category", name, score, expectedScore)
+          );
+        }
       }
     }
   }
 
-  if (expectations.audits) {
-    for (const a of Object.keys(expectations.audits)) {
-      const expectedScore = expectations.audits[a];
+  if (audits) {
+    for (const a of Object.keys(audits)) {
+      const expectedScore = audits[a];
       const { score, name } = results.audits[a];
       if (!evalExpectation(expectedScore, score)) {
         error = true;
