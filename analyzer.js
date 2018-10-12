@@ -9,20 +9,24 @@ function getFailedExpectationMessage(type, name, score, expectedScore) {
   return `${type} '${name}' score is ${score} (${text} value is ${expectedScore})`;
 }
 
-module.exports = function(results, expectations = {}) {
+function normalizeScore(score) {
+	return score * 100;
+}
+module.exports = function({ lhr: results }, expectations = {}) {
   let error = false;
   const messages = [];
   const { categories, audits } = expectations;
 
   if (categories) {
-    for (const r of results.reportCategories) {
-      if (categories[r.id]) {
-        const expectedScore = categories[r.id];
-        const { score, name } = r;
-        if (!evalExpectation(expectedScore, score)) {
+    for (const r in results.categories) {
+      if (categories[r]) {
+        const expectedScore = categories[r];
+        const { score, title: name } = results.categories[r];
+		const normalizedScore = normalizeScore(score);
+        if (!evalExpectation(expectedScore, normalizedScore)) {
           error = true;
           messages.push(
-            getFailedExpectationMessage("Category", name, score, expectedScore)
+            getFailedExpectationMessage("Category", name, normalizedScore, expectedScore)
           );
         }
       }
@@ -32,11 +36,12 @@ module.exports = function(results, expectations = {}) {
   if (audits) {
     for (const a of Object.keys(audits)) {
       const expectedScore = audits[a];
-      const { score, name } = results.audits[a];
-      if (!evalExpectation(expectedScore, score)) {
+      const { score, title: name } = results.audits[a];
+      const normalizedScore = normalizeScore(score);
+      if (!evalExpectation(expectedScore, normalizedScore)) {
         error = true;
         messages.push(
-          getFailedExpectationMessage("Audit", name, score, expectedScore)
+          getFailedExpectationMessage("Audit", name, normalizedScore, expectedScore)
         );
       }
     }
