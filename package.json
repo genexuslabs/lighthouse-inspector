@@ -4,6 +4,7 @@
   "description": "Run Google Lighthouse on a set of URLs, specifying expectations",
   "main": "index.js",
   "scripts": {
+    "start": "node main.js",
     "test": "mocha"
   },
   "keywords": [
@@ -16,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "cli": "^1.0.1",
-    "lighthouse": "^3.2.1"
+    "lighthouse": "^5.1.0"
   },
   "bin": {
     "lighthouse-inspector": "cli.js"

@@ -10,8 +10,9 @@ function getFailedExpectationMessage(type, name, score, expectedScore) {
 }
 
 function normalizeScore(score) {
-	return score * 100;
+  return score * 100;
 }
+
 module.exports = function({ lhr: results }, expectations = {}) {
   let error = false;
   const messages = [];
@@ -22,11 +23,16 @@ module.exports = function({ lhr: results }, expectations = {}) {
       if (categories[r]) {
         const expectedScore = categories[r];
         const { score, title: name } = results.categories[r];
-		const normalizedScore = normalizeScore(score);
+        const normalizedScore = normalizeScore(score);
         if (!evalExpectation(expectedScore, normalizedScore)) {
           error = true;
           messages.push(
-            getFailedExpectationMessage("Category", name, normalizedScore, expectedScore)
+            getFailedExpectationMessage(
+              "Category",
+              name,
+              normalizedScore,
+              expectedScore
+            )
           );
         }
       }
@@ -34,15 +40,22 @@ module.exports = function({ lhr: results }, expectations = {}) {
   }
 
   if (audits) {
-    for (const a of Object.keys(audits)) {
-      const expectedScore = audits[a];
-      const { score, title: name } = results.audits[a];
-      const normalizedScore = normalizeScore(score);
-      if (!evalExpectation(expectedScore, normalizedScore)) {
-        error = true;
-        messages.push(
-          getFailedExpectationMessage("Audit", name, normalizedScore, expectedScore)
-        );
+    for (const auditKey of Object.keys(audits)) {
+      const expectedScore = audits[auditKey];
+      if (results.audits[auditKey]) {
+        const { score, title: name } = results.audits[auditKey];
+        const normalizedScore = normalizeScore(score);
+        if (!evalExpectation(expectedScore, normalizedScore)) {
+          error = true;
+          messages.push(
+            getFailedExpectationMessage(
+              "Audit",
+              name,
+              normalizedScore,
+              expectedScore
+            )
+          );
+        }
       }
     }
   }
